@@ -1,4 +1,11 @@
-  <!-- slider section -->
+{% extends "base.html" %}
+{% block home_status %}active{% endblock home_status %}
+
+{% load static %}
+
+{% block slider %}
+
+    <!-- slider section -->
     <section class="slider_section ">
       <div id="customCarousel1" class="carousel slide" data-ride="carousel">
         <div class="carousel-inner">
@@ -424,3 +431,5 @@
       });
     });
   </script>
+  
+{% endblock main %}
