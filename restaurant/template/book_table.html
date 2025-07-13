@@ -1,0 +1,209 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block book_status %}
+active
+{% endblock book_status %}
+
+{% block main %}
+<!-- Booking Hero Section -->
+<section class="bg-info text-white text-center py-5">
+  <div class="container">
+    <h1 class="display-4">Book a Table</h1>
+    <p class="lead">Reserve your table for an unforgettable dining experience</p>
+  </div>
+</section>
+
+<!-- Booking Form Section -->
+<section class="py-5">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8">
+        <div class="card shadow">
+          <div class="card-body p-5">
+            <h3 class="card-title mb-4">Make a Reservation</h3>
+            <form method="POST" action="{% url 'book_table' %}">
+              {% csrf_token %}
+              <div class="row g-3">
+                <div class="col-md-6">
+                  <label for="name" class="form-label">Full Name *</label>
+                  <input type="text" class="form-control" id="name" name="name" required>
+                </div>
+                <div class="col-md-6">
+                  <label for="email" class="form-label">Email Address *</label>
+                  <input type="email" class="form-control" id="email" name="email" required>
+                </div>
+                <div class="col-md-6">
+                  <label for="phone" class="form-label">Phone Number *</label>
+                  <input type="tel" class="form-control" id="phone" name="phone" required>
+                </div>
+                <div class="col-md-6">
+                  <label for="persons" class="form-label">Number of Persons *</label>
+                  <select class="form-select" id="persons" name="persons" required>
+                    <option value="">Select number of persons</option>
+                    <option value="1">1 Person</option>
+                    <option value="2">2 Persons</option>
+                    <option value="3">3 Persons</option>
+                    <option value="4">4 Persons</option>
+                    <option value="5">5 Persons</option>
+                    <option value="6">6 Persons</option>
+                    <option value="7">7+ Persons</option>
+                  </select>
+                </div>
+                <div class="col-md-6">
+                  <label for="date" class="form-label">Date *</label>
+                  <input type="date" class="form-control" id="date" name="date" required>
+                </div>
+                <div class="col-md-6">
+                  <label for="time" class="form-label">Time *</label>
+                  <select class="form-select" id="time" name="time" required>
+                    <option value="">Select time</option>
+                    <option value="11:00">11:00 AM</option>
+                    <option value="11:30">11:30 AM</option>
+                    <option value="12:00">12:00 PM</option>
+                    <option value="12:30">12:30 PM</option>
+                    <option value="13:00">1:00 PM</option>
+                    <option value="13:30">1:30 PM</option>
+                    <option value="14:00">2:00 PM</option>
+                    <option value="18:00">6:00 PM</option>
+                    <option value="18:30">6:30 PM</option>
+                    <option value="19:00">7:00 PM</option>
+                    <option value="19:30">7:30 PM</option>
+                    <option value="20:00">8:00 PM</option>
+                    <option value="20:30">8:30 PM</option>
+                    <option value="21:00">9:00 PM</option>
+                    <option value="21:30">9:30 PM</option>
+                  </select>
+                </div>
+                <div class="col-12">
+                  <label for="special_requests" class="form-label">Special Requests</label>
+                  <textarea class="form-control" id="special_requests" name="special_requests" rows="3" 
+                            placeholder="Any special requests or dietary requirements?"></textarea>
+                </div>
+                <div class="col-12">
+                  <button type="submit" class="btn btn-primary btn-lg w-100">Book Table</button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+      
+      <div class="col-lg-4">
+        <div class="card shadow">
+          <div class="card-body p-4">
+            <h4 class="card-title mb-4">Restaurant Information</h4>
+            
+            <div class="mb-4">
+              <h6><i class="fas fa-clock text-primary me-2"></i>Opening Hours</h6>
+              <ul class="list-unstyled">
+                <li>Monday - Friday: 11:00 AM - 10:00 PM</li>
+                <li>Saturday - Sunday: 10:00 AM - 11:00 PM</li>
+              </ul>
+            </div>
+            
+            <div class="mb-4">
+              <h6><i class="fas fa-phone text-primary me-2"></i>Contact</h6>
+              <p class="mb-1">Phone: (555) 123-4567</p>
+              <p class="mb-1">Email: info@foodierestaurant.com</p>
+            </div>
+            
+            <div class="mb-4">
+              <h6><i class="fas fa-map-marker-alt text-primary me-2"></i>Address</h6>
+              <p>123 Main Street<br>City, State 12345</p>
+            </div>
+            
+            <div class="mb-4">
+              <h6><i class="fas fa-info-circle text-primary me-2"></i>Booking Policy</h6>
+              <ul class="list-unstyled small">
+                <li>• Reservations held for 15 minutes</li>
+                <li>• Cancellation notice: 2 hours</li>
+                <li>• Large groups: 24 hours notice</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Why Book With Us Section -->
+<section class="bg-light py-5">
+  <div class="container">
+    <h2 class="text-center mb-5">Why Book With Us?</h2>
+    <div class="row g-4">
+      <div class="col-md-4 text-center">
+        <div class="p-4">
+          <i class="fas fa-utensils fa-3x text-primary mb-3"></i>
+          <h5>Fresh Ingredients</h5>
+          <p class="text-muted">We use only the freshest, locally-sourced ingredients in all our dishes.</p>
+        </div>
+      </div>
+      <div class="col-md-4 text-center">
+        <div class="p-4">
+          <i class="fas fa-star fa-3x text-warning mb-3"></i>
+          <h5>5-Star Service</h5>
+          <p class="text-muted">Our experienced staff ensures you have an exceptional dining experience.</p>
+        </div>
+      </div>
+      <div class="col-md-4 text-center">
+        <div class="p-4">
+          <i class="fas fa-music fa-3x text-success mb-3"></i>
+          <h5>Great Atmosphere</h5>
+          <p class="text-muted">Enjoy your meal in our cozy, welcoming atmosphere with background music.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ Section -->
+<section class="py-5">
+  <div class="container">
+    <h2 class="text-center mb-5">Frequently Asked Questions</h2>
+    <div class="row justify-content-center">
+      <div class="col-lg-8">
+        <div class="accordion" id="faqAccordion">
+          <div class="accordion-item">
+            <h2 class="accordion-header">
+              <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#faq1">
+                How far in advance should I book?
+              </button>
+            </h2>
+            <div id="faq1" class="accordion-collapse collapse show" data-bs-parent="#faqAccordion">
+              <div class="accordion-body">
+                We recommend booking at least 24 hours in advance for regular tables and 48 hours for large groups or special occasions.
+              </div>
+            </div>
+          </div>
+          <div class="accordion-item">
+            <h2 class="accordion-header">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq2">
+                Can I modify or cancel my reservation?
+              </button>
+            </h2>
+            <div id="faq2" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+              <div class="accordion-body">
+                Yes, you can modify or cancel your reservation up to 2 hours before your scheduled time by calling us directly.
+              </div>
+            </div>
+          </div>
+          <div class="accordion-item">
+            <h2 class="accordion-header">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq3">
+                Do you accommodate dietary restrictions?
+              </button>
+            </h2>
+            <div id="faq3" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+              <div class="accordion-body">
+                Absolutely! We offer vegetarian, vegan, and gluten-free options. Please mention any dietary requirements in your special requests.
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock main %} 

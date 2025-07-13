@@ -1,0 +1,140 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block menu_status %}
+active
+{% endblock menu_status %}
+
+{% block main %}
+<!-- Menu Hero Section -->
+<section class="bg-success text-white text-center py-5">
+  <div class="container">
+    <h1 class="display-4">Our Menu</h1>
+    <p class="lead">Discover our delicious selection of dishes prepared with fresh ingredients</p>
+  </div>
+</section>
+
+<!-- Category Filter Section -->
+<section class="py-4 bg-light">
+  <div class="container">
+    <div class="text-center">
+      <h3 class="mb-3">Filter by Category</h3>
+      <div class="btn-group" role="group">
+        <a href="{% url 'menu' %}" class="btn btn-outline-success {% if not selected_category %}active{% endif %}">
+          All Items
+        </a>
+        {% for category in categories %}
+        <a href="{% url 'menu' %}?category={{ category.id }}" 
+           class="btn btn-outline-success {% if selected_category == category.id|stringformat:'s' %}active{% endif %}">
+          {{ category.Category_name }}
+        </a>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Menu Items Section -->
+<section class="py-5">
+  <div class="container">
+    {% if menu_items %}
+    <div class="row g-4">
+      {% for item in menu_items %}
+      <div class="col-md-6 col-lg-4">
+        <div class="card h-100 shadow-sm">
+          {% if item.Image %}
+          <img src="{{ item.Image.url }}" class="card-img-top" alt="{{ item.Item_name }}" style="height: 200px; object-fit: cover;">
+          {% else %}
+          <img src="https://images.unsplash.com/photo-1565299624946-b28f40a0ca4b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1481&q=80" 
+               class="card-img-top" alt="{{ item.Item_name }}" style="height: 200px; object-fit: cover;">
+          {% endif %}
+          <div class="card-body d-flex flex-column">
+            <div class="d-flex justify-content-between align-items-start mb-2">
+              <h5 class="card-title mb-0">{{ item.Item_name }}</h5>
+              <span class="badge bg-success">{{ item.category.Category_name }}</span>
+            </div>
+            <p class="card-text flex-grow-1">{{ item.description|truncatewords:15 }}</p>
+            <div class="d-flex justify-content-between align-items-center">
+              <h6 class="text-success mb-0">${{ item.Price }}</h6>
+              <button class="btn btn-primary btn-sm">Add to Cart</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+    {% else %}
+    <div class="text-center py-5">
+      <h3 class="text-muted">No menu items found</h3>
+      <p class="text-muted">Please check back later or contact us for more information.</p>
+    </div>
+    {% endif %}
+  </div>
+</section>
+
+<!-- Special Offers Section -->
+<section class="bg-warning py-5">
+  <div class="container">
+    <h2 class="text-center mb-4">Special Offers</h2>
+    <div class="row g-4">
+      <div class="col-md-6">
+        <div class="card border-0 bg-transparent">
+          <div class="card-body text-center">
+            <h4 class="text-danger">Lunch Special</h4>
+            <p class="lead">20% off on all main courses</p>
+            <p class="text-muted">Valid Monday to Friday, 11:00 AM - 2:00 PM</p>
+            <button class="btn btn-danger">Order Now</button>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="card border-0 bg-transparent">
+          <div class="card-body text-center">
+            <h4 class="text-danger">Weekend Brunch</h4>
+            <p class="lead">Free dessert with any main course</p>
+            <p class="text-muted">Valid Saturday and Sunday, 10:00 AM - 3:00 PM</p>
+            <button class="btn btn-danger">Book Table</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Dietary Information -->
+<section class="py-5">
+  <div class="container">
+    <h2 class="text-center mb-4">Dietary Information</h2>
+    <div class="row g-4">
+      <div class="col-md-3 text-center">
+        <div class="p-3">
+          <i class="fas fa-leaf fa-2x text-success mb-3"></i>
+          <h5>Vegetarian</h5>
+          <p class="text-muted">Fresh vegetarian options available</p>
+        </div>
+      </div>
+      <div class="col-md-3 text-center">
+        <div class="p-3">
+          <i class="fas fa-seedling fa-2x text-success mb-3"></i>
+          <h5>Vegan</h5>
+          <p class="text-muted">Plant-based dishes on request</p>
+        </div>
+      </div>
+      <div class="col-md-3 text-center">
+        <div class="p-3">
+          <i class="fas fa-allergies fa-2x text-warning mb-3"></i>
+          <h5>Allergen Info</h5>
+          <p class="text-muted">Detailed allergen information available</p>
+        </div>
+      </div>
+      <div class="col-md-3 text-center">
+        <div class="p-3">
+          <i class="fas fa-heart fa-2x text-danger mb-3"></i>
+          <h5>Healthy Options</h5>
+          <p class="text-muted">Low-calorie and healthy choices</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock main %} 
